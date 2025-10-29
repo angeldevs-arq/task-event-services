@@ -2,7 +2,7 @@ spring:
   application:
     name: task-event-service
   datasource:
-    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/task_event_db}
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/task_event_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
