@@ -27,4 +27,16 @@ class TaskTest {
 
         assertThrows(IllegalStateException.class, () -> task.changeStatus(TaskStatus.IN_PROGRESS));
     }
+
+    @Test
+    void constructorShouldValidateMandatoryAttributes() {
+        assertThrows(NullPointerException.class,
+                () -> new Task(TaskId.newId(), null, "Description", TaskStatus.PENDING, LocalDate.now(), UUID.randomUUID(), UUID.randomUUID()));
+
+        assertThrows(NullPointerException.class,
+                () -> new Task(TaskId.newId(), "Task", "Description", TaskStatus.PENDING, null, UUID.randomUUID(), UUID.randomUUID()));
+
+        assertThrows(NullPointerException.class,
+                () -> new Task(TaskId.newId(), "Task", "Description", TaskStatus.PENDING, LocalDate.now(), null, UUID.randomUUID()));
+    }
 }

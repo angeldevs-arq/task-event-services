@@ -1,13 +1,14 @@
 package com.angeldevs.taskeventservices;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.angeldevs.taskservice.TaskEventServiceApplication;
 
-@SpringBootApplication
-public class TaskEventServicesApplication {
+public final class TaskEventServicesApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(TaskEventServicesApplication.class, args);
+    private TaskEventServicesApplication() {
+        // Utility class
     }
 
+    public static void main(String[] args) {
+        TaskEventServiceApplication.main(args);
+    }
 }

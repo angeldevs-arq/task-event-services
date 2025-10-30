@@ -5,7 +5,7 @@ import com.angeldevs.taskservice.domain.model.valueobject.TaskId;
 import com.angeldevs.taskservice.domain.model.valueobject.TaskStatus;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Task {
@@ -19,12 +19,12 @@ public class Task {
     private UUID assignedUserId;
 
     public Task(TaskId id, String title, String description, TaskStatus status, LocalDate dueDate, UUID eventId, UUID assignedUserId) {
-        this.id = Optional.ofNullable(id).orElseGet(TaskId::newId);
-        this.title = title;
+        this.id = Objects.requireNonNullElseGet(id, TaskId::newId);
+        this.title = Objects.requireNonNull(title, "Task title is required");
         this.description = description;
-        this.status = Optional.ofNullable(status).orElse(TaskStatus.PENDING);
-        this.dueDate = dueDate;
-        this.eventId = eventId;
+        this.status = Objects.requireNonNullElse(status, TaskStatus.PENDING);
+        this.dueDate = Objects.requireNonNull(dueDate, "Task due date is required");
+        this.eventId = Objects.requireNonNull(eventId, "Event identifier is required");
         this.assignedUserId = assignedUserId;
     }
 
@@ -37,9 +37,9 @@ public class Task {
     }
 
     public void rename(String title, String description, LocalDate dueDate) {
-        this.title = title;
+        this.title = Objects.requireNonNull(title, "Task title is required");
         this.description = description;
-        this.dueDate = dueDate;
+        this.dueDate = Objects.requireNonNull(dueDate, "Task due date is required");
     }
 
     public String getDescription() {
@@ -76,6 +76,6 @@ public class Task {
     }
 
     public void postpone(LocalDate newDueDate) {
-        this.dueDate = newDueDate;
+        this.dueDate = Objects.requireNonNull(newDueDate, "Task due date is required");
     }
 }

@@ -29,7 +29,7 @@ public class TaskJpaEntity {
     @Column(name = "status", nullable = false)
     private TaskStatus status;
 
-    @Column(name = "due_date")
+    @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
     @Column(name = "event_id", nullable = false, columnDefinition = "BINARY(16)")
@@ -38,7 +38,7 @@ public class TaskJpaEntity {
     @Column(name = "assigned_user_id", columnDefinition = "BINARY(16)")
     private UUID assignedUserId;
 
-    protected TaskJpaEntity() {
+    public TaskJpaEntity() {
     }
 
     public TaskJpaEntity(UUID id, String title, String description, TaskStatus status, LocalDate dueDate, UUID eventId, UUID assignedUserId) {
