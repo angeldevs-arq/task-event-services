@@ -6,10 +6,9 @@ spring:
     name: task-event-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/eventify
-    username: root
-    password: 12345678
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/task-event?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
 
   jpa:
     show-sql: true
@@ -25,7 +24,9 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:9090
+        url: ${ADMIN_URL:http://localhost:9090}
+        instance:
+          service-base-url: ${SERVICE_URL:http://localhost:8083}
 
 documentation:
   application:
@@ -41,9 +42,12 @@ authorization:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
     register-with-eureka: true
     fetch-registry: true
+  instance:
+    hostname: ${EUREKA_HOST:localhost}    
+    secure-port-enabled: true
 
 management:
   endpoints:
